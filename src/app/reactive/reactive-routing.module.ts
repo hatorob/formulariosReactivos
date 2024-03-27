@@ -13,7 +13,7 @@ const routes: Routes = [
       { path: 'switches', component: SwitchesPageComponent },
       { path: '**', redirectTo: 'basic' },
     ]
-  },
+  }
 ];
 
 @NgModule({
