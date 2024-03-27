@@ -17,12 +17,12 @@
                            >
 
                     <span
-                      *ngIf="myForm.controls['name'].getError('required')"
+                      *ngIf="myForm.controls['name'].getError('required') && myForm.controls['name'].touched"
                       class="form-text text-danger">
                       Este campo es requerido
                     </span>
                     <span
-                      *ngIf="myForm.controls['name'].getError('minlength')"
+                      *ngIf="myForm.controls['name'].getError('minlength') && myForm.controls['name'].touched"
                       class="form-text text-danger">
                         <!-- Debe de ser de 3 letras -->
                         Este campo requiere mínimo 3 letras
