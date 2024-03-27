@@ -28,9 +28,36 @@ export class BasicPageComponent implements OnInit {
     inStorage: [0, [ Validators.min(0)] ],
   })
 
-  constructor( private fb: FormBuilder ){}
+  constructor( private fb: FormBuilder ){
+
+  }
+
   ngOnInit(): void {
     //this.myForm.reset( this.RTX5090 )
+  }
+
+  //! Me creo una función para no tener que hacer y copiar todas las validaciones en el html, si no que directamente con una función me lo haga
+  isValidField( field: string ): boolean | null {
+    return this.myForm.controls[field].errors && this.myForm.controls[field].touched;
+  }
+
+  getFieldError( field: string ): string | null {
+
+    if( !this.myForm.controls[field]) return null;
+
+    const errors = this.myForm.controls[field].errors || {};
+
+    for (const error of Object.keys(errors)) {
+      switch(error) {
+        case 'required':
+          return "Este campo es requerido";
+        case 'minlength':
+          return `Este campo es mínimo de ${ errors['minlength'].requiredLength} caracteres`;
+        default:
+          return null
+      }
+    }
+    return null;
   }
 
   onSave():void {
