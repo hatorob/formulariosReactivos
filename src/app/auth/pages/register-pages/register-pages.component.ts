@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //! Podemos usar la importanciones así también
 //import * as customValidators from '../../../shared/validators/validators.functions';
 import { ValidatorsService } from '../../../shared/services/validators.service';
+import { EmailValidatorService } from '../../../shared/validators/email-validator.service';
 
 @Component({
   templateUrl: './register-pages.component.html',
@@ -13,7 +14,8 @@ export class RegisterPagesComponent {
 
   public myForm: FormGroup = this.fb.group({
     name: ['', [ Validators.required, Validators.pattern(this.validatorService.firstNameAndLastnamePattern) ]],
-    email: ['', [ Validators.required, Validators.pattern(this.validatorService.emailPattern) ]],
+    //email: ['', [ Validators.required, Validators.pattern(this.validatorService.emailPattern) ], [ new EmailValidatorService() ]],
+    email: ['', [ Validators.required, Validators.pattern(this.validatorService.emailPattern) ], [ this.emailValidator ]],
     userName: ['', [ Validators.required, this.validatorService.cantBeStrider ]],
     password: ['', [ Validators.required, Validators.minLength(6) ]],
     confirmedPassword:  ['', [ Validators.required ]]
@@ -21,7 +23,8 @@ export class RegisterPagesComponent {
 
   constructor(
     private fb: FormBuilder,
-    private validatorService: ValidatorsService
+    private validatorService: ValidatorsService,
+    private emailValidator: EmailValidatorService
   ) {
 
   }
